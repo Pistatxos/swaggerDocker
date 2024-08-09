@@ -1,0 +1,36 @@
+version: '3'
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui:latest
+    container_name: "swagger-ui"
+    ports:
+      - "8880:8080"
+
+    volumes: ## Comenta o borra el volumen que no uses
+      ## Volumen si usamos plantilla única
+      - ./swagger/swagger.yaml:/swagger.yaml
+      ## Volumen si usamos el desplegable para varias plantillas
+      - ./swagger:/usr/share/nginx/html/swagger
+
+    environment: ## Comenta o borra si no usas plantilla única o con deplegable.
+      ## Para usar una plantilla única (usaremos el archivo swagger.yaml que hay en raiz):
+      SWAGGER_JSON: /swagger.yaml
+
+      ## Para usar desplegable con varias plantillas (usaremos las plantillas de dentro de la carpeta /swagger):
+      URLS_PRIMARY_NAME: "API Ejemplo 1"
+      URLS: '[
+                {"name": "API Ejemplo 1", "url": "/swagger/ejemplo1.yaml"}, 
+                {"name": "API Ejemplo 2", "url": "/swagger/ejemplo2.yaml"}
+              ]'
+      
+      ## Se añade para que no de el error de invalid.
+      VALIDATOR_URL: ""
+    
+    # En el caso de querer añadirlo a una red docker (para ejecutar con nginx por ejemplo)
+    # Descomentar las siguientes lineas
+    #networks:
+      #- tu_network
+
+#networks:
+  #tu_network:
+    #external: true

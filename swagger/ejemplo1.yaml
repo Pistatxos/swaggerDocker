@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  title: API Ejemplo
+  description: |-
+    <p align="right">
+      <img src="https://tomonota.net/wp-content/uploads/2024/08/Logo-Tomonota-Negro-e1723131211126.png" alt="LOGO" />
+    </p>
+    Descripción de la api...
+
+    Gracias a: [TomoNota](https://tomonota.net)
+
+    Tenemos varios ejemplos de uso de la plantilla.
+      - Para documentar.
+      - Y presentar.
+
+    **Espero os sea de ayuda**
+
+  version: 1.0.0
+
+servers:
+  - url: https://tu.dominio.com
+    description: Servidor de prueba
+
+tags:
+  - name: grupo1
+    description: Consultas a la base de datos.
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+security:
+  - BearerAuth: []
+
+paths:
+
+  /recursoEjemplo:
+    get:
+      tags:
+        - grupo1
+      summary: Comentario linea método get.
+      description: Descripción de la consulta get.
+      responses:
+        '200':
+          description: Respuesta correcta.
+        '400':
+          description: Datos incorrectos.
+        '500':
+          description: Error en el servidor.
+
+    post:
+      tags:
+        - grupo1
+      summary: Comentario linea método post
+      description: Descripción método post.
+      operationId: consultarRegistros
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "texto ejemplo"
+          description: Descripción ejemplo.
+        - name: varios
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [varios1, varios2, varios3]
+          description: Ejemplo con desplegable.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name_test:
+                  type: string
+                  example: "ejemplo"
+                name_test2:
+                  type: string
+                  example: "ejemplo2"
+      security:
+        - BearerAuth: []                
+      responses:
+        '200':
+          description: | 
+            Existen varias posibilidades para esta respuesta:
+            - Se puede organizar un poco el texto.
+              - De varias maneras.
+            - Como en este:
+              - Ejemplo texto.
+        '400':
+          description: Datos incorrectos.
+        '500':
+          description: Error en el servidor.
+
+    put:
+      tags:
+        - grupo1
+      summary: Comentario linea método put.
+      description: Descripción método put.
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "texto ejemplo"
+          description: Descripción ejemplo.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name_test:
+                  type: string
+                  example: "ejemplo"
+                name_test2:
+                  type: string
+                  example: "ejemplo2"
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Respuesta correcta.
+        '400':
+          description: Datos incorrectos.
+        '500':
+          description: Error en el servidor.
+
+    delete:
+      tags:
+        - grupo1
+      summary: Comentario linea método delete.
+      description: Descripción método delete.
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "texto ejemplo"
+          description: Descripción ejemplo.
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Respuesta correcta.
+        '400':
+          description: Datos incorrectos.
+        '500':
+          description: Error en el servidor.
